@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 
 toaddr = "cse.190840131006@gmail.com"
 fromaddr = "cse.190840131004@gmail.com"
-password = "vutisphphpenqrgp"
+password = "your-password"
 def SendMail(ImgFileName):
     img_data = open(ImgFileName, 'rb').read()
     msg = MIMEMultipart()
