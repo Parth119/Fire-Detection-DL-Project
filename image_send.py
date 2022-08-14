@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 
-toaddr = "cse.190840131006@gmail.com"
+toaddr = "receiver-address"
 fromaddr = "cse.190840131004@gmail.com"
 password = "your-password"
 def SendMail(ImgFileName):
