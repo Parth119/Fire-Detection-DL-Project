@@ -20,7 +20,7 @@ count = 0
 
 toaddr = "krunal.bhatia224@gmail.com"
 fromaddr = "cse.190840131004@gmail.com"
-password = "vutisphphpenqrgp"
+password = "your-password"
 
 def SendMail(ImgFileName):
     img_data = open(ImgFileName, 'rb').read()
