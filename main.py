@@ -8,9 +8,7 @@ import playsound
 import threading
 import requests
 from geopy.geocoders import Nominatim
-from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
+
 
 Alarm_Status = False
 Email_Status = False
@@ -18,66 +16,26 @@ Fire_Reported = 0
 Image_Status = False
 count = 0
 
-toaddr = "krunal.bhatia224@gmail.com"
+toaddr = "receiver-address"
 fromaddr = "cse.190840131004@gmail.com"
 password = "your-password"
 
-def SendMail(ImgFileName):
-    img_data = open(ImgFileName, 'rb').read()
-    msg = MIMEMultipart()
-    msg['Subject'] = 'subject'
-    msg['From'] = fromaddr
-    msg['To'] = toaddr
 
-    text = MIMEText("Some one entered into your home.")
-    msg.attach(text)
-    image = MIMEImage(img_data, name=os.path.basename(ImgFileName))
-    msg.attach(image)
-
-    s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.ehlo()
-    s.starttls()
-    s.ehlo()
-    s.login(fromaddr, password)
-    s.sendmail(fromaddr, fromaddr, msg.as_string())
-    print("Mail send successfully.")
-    s.quit()
-
-def play_alarm_sound_function():
-    playsound.playsound('alarm-sound.mp3', True)
-
-
-def get_loc():
-    geolocator = Nominatim(user_agent="geoapi")
-    res = requests.get('https://ipinfo.io')
-    data = res.json()
-
-    city = data['city']
-    print("City :" + city)
-
-    location = data['loc'].split(',')
-    latitude = location[0]
-    longitude = location[1]
-    print(location)
-
-    loc = geolocator.geocode(latitude + "," + longitude)
-    print(loc)
-    return loc
 
 
 def send_mail_function():
-    recipientEmail = "krunal.bhatia224@gmail.com"
+    recipientEmail = "recipient-email"
 
     recipientEmail = recipientEmail.lower()
-    toaddr = "cse.190840131006@gmail.com"
+    toaddr = "receiver-address"
     fromaddr = "cse.190840131004@gmail.com"
-    password = "vutisphphpenqrgp"
+    password = "your-password"
 
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
-        server.login("cse.190840131004@gmail.com", "vutisphphpenqrgp")
+        server.login("cse.190840131004@gmail.com", "your-password")
         msg = str(get_loc())
 
         server.sendmail("cse.190840131004@gmail.com", recipientEmail,
@@ -85,26 +43,6 @@ def send_mail_function():
         print("sent to {}".format(recipientEmail))
         server.close()
 
-
-        # img_data = open(ImgFileName, 'rb').read()
-        # msg = MIMEMultipart()
-        # msg['Subject'] = 'subject'
-        # msg['From'] = fromaddr
-        # msg['To'] = toaddr
-        #
-        # text = MIMEText("Some one entered into your home.")
-        # msg.attach(text)
-        # image = MIMEImage(img_data, name=os.path.basename(ImgFileName))
-        # msg.attach(image)
-        #
-        # s = smtplib.SMTP('smtp.gmail.com', 587)
-        # s.ehlo()
-        # s.starttls()
-        # # s.ehlo()
-        # s.login(fromaddr, password)
-        # s.sendmail(fromaddr, fromaddr, msg.as_string())
-        # print("Mail send successfully.")
-        # s.quit()
 
     except Exception as e:
         print(e)
